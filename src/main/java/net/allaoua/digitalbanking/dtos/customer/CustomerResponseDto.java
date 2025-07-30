@@ -1,4 +1,4 @@
-package net.allaoua.digitalbanking.dtos;
+package net.allaoua.digitalbanking.dtos.customer;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

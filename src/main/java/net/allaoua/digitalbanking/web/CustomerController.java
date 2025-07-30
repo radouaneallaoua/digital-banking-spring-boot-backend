@@ -1,12 +1,10 @@
 package net.allaoua.digitalbanking.web;
 
 import jakarta.validation.Valid;
-import net.allaoua.digitalbanking.dtos.CustomerRequestDto;
-import net.allaoua.digitalbanking.dtos.CustomerResponseDto;
+import net.allaoua.digitalbanking.dtos.customer.CustomerRequestDto;
+import net.allaoua.digitalbanking.dtos.customer.CustomerResponseDto;
 import net.allaoua.digitalbanking.services.ICustomerService;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,9 +20,20 @@ public class CustomerController {
     }
 
     @GetMapping
-    ResponseEntity<List<CustomerResponseDto>> allCustomers(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "10") int size ) {
+    ResponseEntity<List<CustomerResponseDto>> allCustomers(@RequestParam(defaultValue = "0",required = false) int page,@RequestParam(defaultValue = "10",required = false) int size ) {
         return customerService.allCustomers(PageRequest.of(page, size));
     }
+
+    @GetMapping("by-email")
+    ResponseEntity<List<CustomerResponseDto>> allCustomersByEmail(@RequestParam(defaultValue = "0",required = false) int page,@RequestParam(defaultValue = "10",required = false) int size,@RequestParam String email ) {
+        return customerService.allCustomersByEmail(email,PageRequest.of(page, size));
+    }
+
+    @GetMapping("by-name")
+    ResponseEntity<List<CustomerResponseDto>> allCustomersByName(@RequestParam(defaultValue = "0",required = false) int page,@RequestParam(defaultValue = "10",required = false) int size,@RequestParam String name ) {
+        return customerService.allCustomersByName(name,PageRequest.of(page, size));
+    }
+
     @PostMapping
     ResponseEntity<CustomerResponseDto> addCustomer(@Valid @RequestBody CustomerRequestDto customer) {
         return customerService.addCustomer(customer);

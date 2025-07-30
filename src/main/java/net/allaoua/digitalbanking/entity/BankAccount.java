@@ -1,5 +1,6 @@
 package net.allaoua.digitalbanking.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,12 +27,13 @@ public abstract class BankAccount {
     private LocalDateTime createdAt;
     private double balance;
     private String currency;
+
     @Enumerated(EnumType.STRING)
     private AccountStatus status;
 
     @ManyToOne
     private Customer customer;
-
-    @OneToMany(mappedBy = "account",fetch = FetchType.EAGER)
+    @JsonIgnore
+    @OneToMany(mappedBy = "account",fetch = FetchType.EAGER,cascade = CascadeType.ALL ,orphanRemoval = true)
     private List<Operation> operations;
 }

@@ -2,14 +2,12 @@ package net.allaoua.digitalbanking.entity;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
+@Builder
 @DiscriminatorValue("SA")
 @AllArgsConstructor
 @NoArgsConstructor

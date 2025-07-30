@@ -30,4 +30,24 @@ public class GlobalAppExceptionHandler {
         });
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(BalanceInsufficientException.class)
+    public ResponseEntity<ErrorMessage> handleBalanceInsufficientException(BalanceInsufficientException ex) {
+        ErrorMessage errorMessage= ErrorMessage.builder()
+                .message(ex.getMessage())
+                .code(400)
+                .timestamp(LocalDateTime.now())
+                .build();
+        return  new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(BankAccountNotFoundException.class)
+    public ResponseEntity<ErrorMessage> handleBankAccountNotFoundException(BankAccountNotFoundException ex) {
+        ErrorMessage errorMessage= ErrorMessage.builder()
+                .message(ex.getMessage())
+                .code(404)
+                .timestamp(LocalDateTime.now())
+                .build();
+        return  new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
+    }
 }

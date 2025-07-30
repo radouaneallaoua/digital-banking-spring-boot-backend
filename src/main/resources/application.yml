@@ -5,7 +5,7 @@ spring:
     url: jdbc:h2:mem:digital-banking-app
     driver-class-name: org.h2.Driver
 
-
+server:
   jpa:
     hibernate:
       ddl-auto: update
@@ -20,3 +20,4 @@ spring:
     multipart:
       max-file-size: 100MB
       max-request-size: 100MB
+  port: 8081
